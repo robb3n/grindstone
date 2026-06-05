@@ -1,7 +1,7 @@
 {
   "id": "grindstone",
   "name": "Grindstone",
-  "version": "1.0.0",
+  "version": "1.20.0",
   "minAppVersion": "1.0.0",
   "description": "Turn any inline-tagged line into a spaced-repetition (SM-2) review card.",
   "author": "robb3n",

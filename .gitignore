@@ -2,4 +2,18 @@ node_modules/
 main.js
 *.js.map
 data.json
+
+# macOS Finder metadata
 .DS_Store
+
+# Local design mockups / prototypes — not part of the shipped plugin
+mockup/
+
+# Licensing private keys — Ed25519 signing material. NEVER commit (spec §8).
+.keys/
+
+# Claude Code tooling config — not part of the shipped plugin
+.claude/
+
+# anvil scratchpad — forge 事中草稿，阅后即焚
+.anvil/scratchpad/

@@ -1,10 +1,23 @@
 # Grindstone
 
-Turn any inline-tagged line into a spaced-repetition (SM-2) review card.
+> Turn any inline-tagged line into a spaced-repetition (SM-2) review card.
 
-Zero extra syntax. Any line in your notes that contains a trigger tag becomes a review card — the title is the line itself, the answer is everything below it.
+<p align="center">
+  <img src="assets/overview.png" alt="Grindstone workspace — Overview tab" width="820">
+</p>
 
-**Vault-read-only by default.** Grindstone never modifies your notes unless you opt in. The two features that touch your files (embedded card IDs and star writeback) are off by default and exposed in the first-run welcome modal and Settings.
+Grindstone turns the notes you already write into a spaced-repetition system. No decks to build, no special syntax to learn — tag a line with `#grind` and it becomes a review card, scheduled with the proven SM-2 algorithm. Your vault stays **read-only by default**: Grindstone never touches your notes unless you opt in.
+
+## How it works
+
+Keep writing notes the way you always do. Add a trigger tag to any line worth remembering:
+
+```markdown
+The mitochondria is the powerhouse of the cell. #grind
+It generates most of the cell's ATP through oxidative phosphorylation.
+```
+
+Grindstone turns that into a card — the **question** is the text on the tagged line, the **answer** is everything beneath it (down to the next heading, `---`, or trigger tag). Review it, rate your recall **1–4**, and the next review is scheduled automatically. That's the whole workflow.
 
 ## Free and Pro
 
@@ -26,6 +39,48 @@ The complete spaced-repetition workflow is free. A one-time purchase unlocks the
 - **Radar** — the capability radar (workspace tab, standalone view, and code block)
 
 Payment is required for full access. There is no account and no subscription: you buy a license key once via [afdian (爱发电)](https://www.ifdian.net/item/891a1b7a5e6b11f18a6752540025c377), paste it into Settings, and the unlock is permanent. One license activates up to 3 vaults.
+
+## Installation
+
+**From Obsidian (recommended)** — Settings → Community plugins → Browse → search **Grindstone** → Install → Enable.
+
+**Manual** — download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/robb3n/grindstone/releases/latest), drop them into `.obsidian/plugins/grindstone/`, and enable the plugin.
+
+## Review & scheduling
+
+<p align="center">
+  <img src="assets/review.png" alt="Grindstone review session" width="820">
+</p>
+
+`Space` reveals the answer; rate your recall with **1 / 2 / 3 / 4** (cards whose tags match `autoShowTags` skip the reveal step):
+
+| Key | Rating | Effect |
+|-----|--------|--------|
+| 1 | Again | Re-queued this session; ease −0.20 |
+| 2 | Hard  | Interval × 1.2; ease −0.15 |
+| 3 | Good  | Interval × ease (standard SM-2) |
+| 4 | Easy  | Interval × ease; ease +0.15 |
+
+Start a session from the **Review** tab (inline) or with `Grindstone: Start review` (centered modal) — whichever you prefer.
+
+### SRS presets
+
+Four built-in parameter sets:
+
+- **默认 SM-2** — classic SM-2
+- **Anki 标准** — Anki defaults
+- **高频巩固** — shorter intervals, harsher penalties; good for cramming
+- **轻松记忆** — longer intervals, lighter penalties
+
+With **Pro**, you can save custom presets and assign a different strategy **per deck** (deck = top-level tag). When switching strategies on an existing deck, you choose how to migrate existing cards: gradual, reset ease only, or full reset.
+
+## Track your progress
+
+<p align="center">
+  <img src="assets/stats.png" alt="Grindstone Stats tab" width="820">
+</p>
+
+The **Overview** and **Stats** tabs turn your review history into signal: today's queue and a 7-day forecast, a 12-week activity heatmap, your forgetting curve, accuracy by tag, study minutes, and streaks — so you always know what to review next and how your recall is trending.
 
 ## How cards are detected
 
@@ -49,52 +104,6 @@ If you want history that survives renames and edits, opt in to **embedded IDs** 
 - Edit the question text → history follows
 - Move the block within the file → history follows
 
-## The workspace
-
-`Grindstone: Open workspace` (or the flame ribbon icon) launches the workspace pane:
-
-- **Overview** — today's queue, 7-day forecast, 12-week activity heatmap, maturity / rating breakdowns, top tags
-- **Review** — pre-flight queue summary, inline review session, post-session debrief
-- **Stats** — KPI strip with period deltas, review trend, accuracy by tag, forgetting curve, study minutes
-- **Tags** *(Pro)* — full card browser; multi-tag AND-filter, search, sort, expand a row to see the answer inline
-
-Reviews started from the workspace run **inline** in the Review tab. `Grindstone: Start review` opens the same SRS session as a centered modal — pick whichever you prefer.
-
-## Rating & scheduling
-
-Four ratings, mapped to keys **1 / 2 / 3 / 4**. `Space` reveals the answer; cards whose tags match `autoShowTags` skip the reveal step.
-
-| Key | Rating | Effect |
-|-----|--------|--------|
-| 1 | Again | Re-queued this session; ease −0.20 |
-| 2 | Hard  | Interval × 1.2; ease −0.15 |
-| 3 | Good  | Interval × ease (standard SM-2) |
-| 4 | Easy  | Interval × ease; ease +0.15 |
-
-### SRS presets
-
-Four built-in parameter sets:
-
-- **默认 SM-2** — classic SM-2
-- **Anki 标准** — Anki defaults
-- **高频巩固** — shorter intervals, harsher penalties; good for cramming
-- **轻松记忆** — longer intervals, lighter penalties
-
-With **Pro**, you can save custom presets and assign a different strategy **per deck** (deck = top-level tag). When switching strategies on an existing deck, you choose how to migrate existing cards: gradual, reset ease only, or full reset.
-
-## Star writeback (opt-in)
-
-Off by default. When enabled in Settings, the plugin writes a visual difficulty marker back to the trigger line on every rating:
-
-| Rating | Marker |
-|--------|--------|
-| Again  | ⭐️⭐️⭐️ |
-| Hard   | ⭐️⭐️ |
-| Good   | ⭐️ |
-| Easy   | (cleared) |
-
-This is one of two features that modify your notes (the other is embedded card IDs); both are off by default and have toggle switches in Settings.
-
 ## Settings
 
 | Setting | Default | Description |
@@ -108,7 +117,20 @@ This is one of two features that modify your notes (the other is embedded card I
 | SRS strategy | Default SM-2 | Global preset; per-deck override is a Pro feature. |
 | Theme | auto | `auto` / `dark` / `light` — independent of Obsidian's theme. Toggle from the workspace sidebar. |
 
-## Custom fonts
+### Star writeback (opt-in)
+
+Off by default. When enabled, the plugin writes a visual difficulty marker back to the trigger line on every rating:
+
+| Rating | Marker |
+|--------|--------|
+| Again  | ⭐️⭐️⭐️ |
+| Hard   | ⭐️⭐️ |
+| Good   | ⭐️ |
+| Easy   | (cleared) |
+
+This is one of two features that modify your notes (the other is embedded card IDs); both are off by default and have toggle switches in Settings.
+
+### Custom fonts
 
 Drop `.woff2` / `.ttf` / `.otf` files into the plugin's `fonts-user/` directory; they're registered as the `Grindstone-User` family on next reload.
 
@@ -136,19 +158,6 @@ The free tier makes **no network requests at all**.
 - **No telemetry.** Grindstone contains zero client-side tracking or analytics.
 - **No cloud upload.** Your notes and review history never leave your machine. All plugin data — cards, review logs, statistics, and license — lives in the plugin's own `data.json` inside your vault.
 - **Vault read-only by default** (see above).
-
-## Install
-
-### Manual
-
-Grab `main.js`, `manifest.json`, `styles.css` from the [latest release](https://github.com/robb3n/grindstone/releases/latest), drop them into `.obsidian/plugins/grindstone/`, and enable the plugin.
-
-## Build from source
-
-```bash
-npm install
-npm run build
-```
 
 ## License
 
