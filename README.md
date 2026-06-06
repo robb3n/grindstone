@@ -3,7 +3,7 @@
 > Turn any inline-tagged line into a spaced-repetition (SM-2) review card.
 
 <p align="center">
-  <img src="assets/overview.png" alt="Grindstone workspace — Overview tab" width="820">
+  <img src="media/overview.png" alt="Grindstone — turn any tagged line into a spaced-repetition card" width="820">
 </p>
 
 Grindstone turns the notes you already write into a spaced-repetition system. No decks to build, no special syntax to learn — tag a line with `#grind` and it becomes a review card, scheduled with the proven SM-2 algorithm. Your vault stays **read-only by default**: Grindstone never touches your notes unless you opt in.
@@ -49,7 +49,7 @@ Payment is required for full access. There is no account and no subscription: yo
 ## Review & scheduling
 
 <p align="center">
-  <img src="assets/review.png" alt="Grindstone review session" width="820">
+  <img src="media/review.png" alt="Grindstone review session" width="820">
 </p>
 
 `Space` reveals the answer; rate your recall with **1 / 2 / 3 / 4** (cards whose tags match `autoShowTags` skip the reveal step):
@@ -77,7 +77,7 @@ With **Pro**, you can save custom presets and assign a different strategy **per 
 ## Track your progress
 
 <p align="center">
-  <img src="assets/stats.png" alt="Grindstone Stats tab" width="820">
+  <img src="media/stats.png" alt="Grindstone Stats tab" width="820">
 </p>
 
 The **Overview** and **Stats** tabs turn your review history into signal: today's queue and a 7-day forecast, a 12-week activity heatmap, your forgetting curve, accuracy by tag, study minutes, and streaks — so you always know what to review next and how your recall is trending.
